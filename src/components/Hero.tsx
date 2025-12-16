@@ -113,25 +113,28 @@ export default function Hero({ onTrySystem }: HeroProps) {
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
+      >
+        <a href="#problem-vision">
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center text-[#9AA4B2]"
+            className="flex flex-col items-center text-[#9AA4B2] hover:text-[#00E0FF] transition-colors cursor-pointer"
           >
             <span className="text-sm mb-2">Scroll to explore</span>
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </motion.div>
-        </motion.div>
-      </div>
+        </a>
+      </motion.div>
     </section>
   );
 }
