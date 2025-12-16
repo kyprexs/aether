@@ -8,7 +8,6 @@ import Dashboard from '@/components/Dashboard';
 import VoiceDemo from '@/components/VoiceDemo';
 import RCASection from '@/components/RCASection';
 import ImpactMetrics from '@/components/ImpactMetrics';
-import TeamContact from '@/components/TeamContact';
 import Footer from '@/components/Footer';
 import TryModal from '@/components/TryModal';
 import FloatingButton from '@/components/FloatingButton';
@@ -28,7 +27,6 @@ export default function Home() {
       <VoiceDemo />
       <RCASection />
       <ImpactMetrics />
-      <TeamContact />
       <Footer onTrySystem={openModal} />
 
       {/* Floating chat button */}

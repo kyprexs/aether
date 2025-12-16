@@ -2,21 +2,50 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Download, ChevronRight, AlertCircle, CheckCircle, TrendingUp } from 'lucide-react';
+import { FileText, Download, ChevronRight, AlertCircle, CheckCircle, TrendingUp, Share2, FileSpreadsheet, Send } from 'lucide-react';
 import { rcaData } from '@/lib/mockData';
 
 export default function RCASection() {
   const [selectedVehicle, setSelectedVehicle] = useState<'AETHER0001' | 'AETHER0002'>('AETHER0001');
+  const [showToast, setShowToast] = useState<string | null>(null);
   const rca = rcaData[selectedVehicle];
 
+  const showNotification = (message: string) => {
+    setShowToast(message);
+    setTimeout(() => setShowToast(null), 3000);
+  };
+
   const handleDownloadPDF = () => {
-    // Simulate PDF download
-    alert('PDF download would be triggered here. In production, this would generate a detailed RCA report.');
+    showNotification('RCA Report PDF downloading...');
+  };
+
+  const handleExportCSV = () => {
+    showNotification('Telemetry data exported as CSV');
+  };
+
+  const handleShareReport = () => {
+    showNotification('Report link copied to clipboard!');
+  };
+
+  const handleSendToOEM = () => {
+    showNotification('RCA Report sent to OEM portal');
   };
 
   return (
     <section id="rca" className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
+        {/* Toast notification */}
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-4 right-4 z-50 px-4 py-3 rounded-lg bg-[#00E0FF] text-[#0A0E1A] font-medium shadow-lg"
+          >
+            {showToast}
+          </motion.div>
+        )}
+
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,6 +91,41 @@ export default function RCASection() {
                   <ChevronRight size={16} />
                 </button>
               ))}
+            </div>
+
+            {/* Export Options */}
+            <div className="mt-6 pt-4 border-t border-[#9AA4B2]/20">
+              <h3 className="text-sm font-medium text-[#E6EAF0] mb-3">Export Options</h3>
+              <div className="space-y-2">
+                <button
+                  onClick={handleDownloadPDF}
+                  className="w-full flex items-center gap-2 p-2.5 rounded-lg bg-[#0A0E1A] border border-[#9AA4B2]/20 text-[#9AA4B2] hover:border-[#00E0FF]/30 hover:text-[#00E0FF] transition-colors text-sm"
+                >
+                  <Download size={16} />
+                  Download RCA PDF
+                </button>
+                <button
+                  onClick={handleExportCSV}
+                  className="w-full flex items-center gap-2 p-2.5 rounded-lg bg-[#0A0E1A] border border-[#9AA4B2]/20 text-[#9AA4B2] hover:border-[#00E0FF]/30 hover:text-[#00E0FF] transition-colors text-sm"
+                >
+                  <FileSpreadsheet size={16} />
+                  Export Telemetry CSV
+                </button>
+                <button
+                  onClick={handleShareReport}
+                  className="w-full flex items-center gap-2 p-2.5 rounded-lg bg-[#0A0E1A] border border-[#9AA4B2]/20 text-[#9AA4B2] hover:border-[#00E0FF]/30 hover:text-[#00E0FF] transition-colors text-sm"
+                >
+                  <Share2 size={16} />
+                  Share Report
+                </button>
+                <button
+                  onClick={handleSendToOEM}
+                  className="w-full flex items-center gap-2 p-2.5 rounded-lg bg-[#00E0FF]/10 border border-[#00E0FF]/30 text-[#00E0FF] hover:bg-[#00E0FF]/20 transition-colors text-sm font-medium"
+                >
+                  <Send size={16} />
+                  Send to OEM
+                </button>
+              </div>
             </div>
           </div>
 

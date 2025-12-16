@@ -9,6 +9,15 @@
   --accent-amber: #FFC857;
 }
 
+[data-theme="light"] {
+  --background: #F5F7FA;
+  --background-secondary: #FFFFFF;
+  --foreground: #1A1D23;
+  --muted: #6B7280;
+  --accent-cyan: #00E0FF;
+  --accent-amber: #FFC857;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-background-secondary: var(--background-secondary);
@@ -33,6 +42,11 @@ body {
   color: var(--foreground);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(180deg, #F5F7FA 0%, #FFFFFF 100%);
 }
 
 ::-webkit-scrollbar {
@@ -86,6 +100,15 @@ body {
   }
 }
 
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
@@ -94,11 +117,21 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
+.animate-skeleton {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
 .card {
   background: rgba(17, 19, 21, 0.8);
   border: 1px solid rgba(154, 164, 178, 0.2);
   border-radius: 12px;
   backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(107, 114, 128, 0.2);
 }
 
 .card:hover {
@@ -132,4 +165,61 @@ body {
 .btn-secondary:hover {
   background: rgba(0, 224, 255, 0.1);
   box-shadow: 0 0 20px rgba(0, 224, 255, 0.3);
+}
+
+/* Skeleton loader styles */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(154, 164, 178, 0.1) 25%,
+    rgba(154, 164, 178, 0.2) 50%,
+    rgba(154, 164, 178, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+[data-theme="light"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(107, 114, 128, 0.1) 25%,
+    rgba(107, 114, 128, 0.2) 50%,
+    rgba(107, 114, 128, 0.1) 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Light mode specific overrides */
+[data-theme="light"] .bg-\[\#0A0E1A\] {
+  background-color: #F5F7FA !important;
+}
+
+[data-theme="light"] .bg-\[\#111315\] {
+  background-color: #FFFFFF !important;
+}
+
+[data-theme="light"] .text-\[\#E6EAF0\] {
+  color: #1A1D23 !important;
+}
+
+[data-theme="light"] .text-\[\#9AA4B2\] {
+  color: #6B7280 !important;
+}
+
+[data-theme="light"] .border-\[\#9AA4B2\]\/20 {
+  border-color: rgba(107, 114, 128, 0.2) !important;
+}
+
+[data-theme="light"] .border-\[\#9AA4B2\]\/30 {
+  border-color: rgba(107, 114, 128, 0.3) !important;
 }

@@ -48,7 +48,7 @@ const itemVariants = {
 
 export default function ProblemVision() {
   return (
-    <section id="problem" className="py-24 px-6">
+    <section id="problem-vision" className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div

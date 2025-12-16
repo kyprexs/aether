@@ -1,21 +1,42 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Logo from './Logo';
+import Image from 'next/image';
 import ParticleBackground from './ParticleBackground';
-
+import ThemeToggle from './ThemeToggle';
 interface HeroProps {
   onTrySystem: () => void;
 }
 
 export default function Hero({ onTrySystem }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0E1A] via-[#0A0E1A] to-[#111315]" />
 
       {/* Particle animation */}
       <ParticleBackground />
+
+      {/* Top navigation bar */}
+      <div className="absolute top-0 left-0 right-0 z-20 p-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="AetherDrive Logo"
+              width={40}
+              height={40}
+              className="rounded-lg"
+            />
+            <span className="text-lg font-semibold text-[#E6EAF0]" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+              AetherDrive
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+          </div>
+        </div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
@@ -32,7 +53,13 @@ export default function Hero({ onTrySystem }: HeroProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-6"
           >
-            <Logo size={80} className="animate-float" />
+            <Image
+              src="/logo.png"
+              alt="AetherDrive Logo"
+              width={100}
+              height={100}
+              className="animate-float rounded-2xl"
+            />
           </motion.div>
 
           {/* Title */}
@@ -74,6 +101,7 @@ export default function Hero({ onTrySystem }: HeroProps) {
               Explore Prototype
             </a>
             <button
+              id="try-system-btn"
               onClick={onTrySystem}
               className="btn-secondary text-lg px-8 py-4 rounded-lg inline-flex items-center justify-center gap-2"
             >
